@@ -38,7 +38,11 @@ function setMode(mode, swapTextToo = false) {
   if (outputArea) outputArea.classList.toggle('bijoy-text', isU2B);
   if (fontHint) fontHint.innerText = isU2B ? 'Bijoy in SutonnyMJ • Unicode in Bangla' : 'Clean Unicode output, press-ready';
 
-  if (swapTextToo) swapText(false);
+  if (swapTextToo) {
+    // Swap texts first (no conversion), then convert fresh in the new mode.
+    swapTextSilent();
+    convert();
+  }
   else convert();
 }
 
@@ -46,12 +50,18 @@ function toggleMode() {
   setMode(currentMode === 'U2B' ? 'B2U' : 'U2B', true);
 }
 
-function swapText(reconvert = true) {
+// Swap input/output WITHOUT converting (same-mode swap must not
+// re-convert already-converted text, which would corrupt it).
+function swapTextSilent() {
   const t = inputArea.value;
   inputArea.value = outputArea.value;
   outputArea.value = t;
   updateCounts();
-  if (reconvert) convert();
+}
+
+function swapText() {
+  swapTextSilent();
+  inputArea.focus();
 }
 
 function countStats(text) {
@@ -190,36 +200,24 @@ function toggleTheme() {
   applyTheme(cur === 'dark' ? 'light' : 'dark');
 }
 
-// Full display / focus mode — expands editors to fill the whole screen
+// Full display / focus mode — CSS-only layout (no Fullscreen API, so Esc
+// never leaves the page stuck in a hidden-hero state).
 function toggleFullDisplay() {
   const on = document.body.classList.toggle('full-display');
   const btn2 = document.getElementById('full-btn2');
   if (btn2) btn2.innerHTML = on ? '✕ Exit full' : '⛶ Full display';
-  try {
-    if (on && !document.fullscreenElement && document.documentElement.requestFullscreen) {
-      // try true browser fullscreen; silently ignore if blocked
-      document.documentElement.requestFullscreen().catch(() => {});
-    } else if (!on && document.fullscreenElement && document.exitFullscreen) {
-      document.exitFullscreen().catch(() => {});
-    }
-  } catch (e) {}
   showToast(on ? 'Full display ON — press F to exit' : 'Full display OFF');
 }
 
-// Keyboard: F = full display, Esc exits (in addition to Ctrl+Enter convert)
+// Keyboard: F = full display (in addition to Ctrl+Enter convert).
+// Never trigger while the user is typing in any field.
 document.addEventListener('keydown', (e) => {
-  if (e.target.matches('input')) return;
-  if ((e.key === 'f' || e.key === 'F' || e.key === 'ফ') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-    if (document.activeElement !== inputArea && document.activeElement !== outputArea) {
-      e.preventDefault();
-      toggleFullDisplay();
-    }
-  }
-});
-document.addEventListener('fullscreenchange', () => {
-  if (!document.fullscreenElement && document.body.classList.contains('full-display')) {
-    // keep focus-mode layout even if user exits browser fullscreen with Esc;
-    // press the button / F again to restore hero. Do nothing here on purpose.
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && t.closest && t.closest('textarea, input, select, [contenteditable]')) return;
+  if (e.key === 'f' || e.key === 'F') {
+    e.preventDefault();
+    toggleFullDisplay();
   }
 });
 

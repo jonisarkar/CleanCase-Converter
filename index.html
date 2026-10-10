@@ -209,6 +209,91 @@ footer a{color:var(--primary); text-decoration:none}
 .bijoy-text{font-family:'SutonnyMJ','Hind Siliguri',sans-serif !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 :focus-visible{outline:2px solid var(--primary); outline-offset:2px}
+/* ============ ADVANCED TEXT CLEANER (add-on, isolated) ============ */
+.cleaner-card{margin-top:.9rem}
+.cleaner-head{padding:.9rem 1rem .2rem}
+.cleaner-head h2{font-size:1rem; display:flex; align-items:center; gap:.5rem}
+.cleaner-head p{color:var(--muted); font-size:.83rem; margin-top:.25rem; line-height:1.6}
+.cleaner-head code{font-family:inherit; background:var(--input); border:1px solid var(--border); padding:.05rem .4rem; border-radius:4px; font-size:.76rem}
+.cleaner-body{padding:.8rem 1rem 1rem; display:flex; flex-direction:column; gap:.85rem}
+.cl-grid{display:grid; grid-template-columns:1fr; gap:.7rem}
+@media(min-width:860px){.cl-grid{grid-template-columns:1fr 1fr}}
+.cl-pane{display:flex; flex-direction:column; gap:.5rem; min-width:0}
+.cl-pane textarea{height:46vh; min-height:320px; font-size:1.05rem}
+.cl-label{font-size:.76rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center; gap:.5rem}
+.cl-opts{display:grid; grid-template-columns:1fr; gap:.45rem; background:var(--input); border:1px solid var(--border); border-radius:8px; padding:.75rem .85rem}
+@media(min-width:700px){.cl-opts{grid-template-columns:1fr 1fr}}
+.cl-check{display:flex; gap:.55rem; align-items:flex-start; font-size:.85rem; cursor:pointer; line-height:1.5}
+.cl-check input{width:17px; height:17px; margin-top:.15rem; accent-color:var(--primary); flex-shrink:0; cursor:pointer}
+.cl-check small{display:block; color:var(--muted); font-size:.76rem}
+.cl-row{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center}
+.cl-chip{display:inline-flex; align-items:center; gap:.35rem; font-size:.82rem; background:var(--card); border:1px solid var(--border); border-radius:6px; padding:.35rem .6rem; cursor:pointer; user-select:none}
+.cl-chip input{accent-color:var(--primary); width:15px; height:15px}
+.cl-chip code{font-family:inherit; font-weight:700}
+.cl-input,.cl-find,.cl-rep{background:var(--card); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:.5rem .65rem; font-size:.86rem; font-family:inherit; outline:none}
+.cl-input:focus,.cl-find:focus,.cl-rep:focus{border-color:var(--primary)}
+.cl-input{flex:1; min-width:180px}
+.cl-find,.cl-rep{flex:1; min-width:130px}
+.cl-rule{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:6px; padding:.5rem}
+.cl-rule .mini{flex-shrink:0}
+.cl-actions{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center}
+.cl-stat{font-size:.78rem; color:var(--muted)}
+.cl-stat b{color:var(--text)}
+/* ---- Single-display views + tabs + 3-dot menu + case converter ---- */
+.toolview[hidden]{display:none !important}
+.hero[hidden]{display:none !important}
+.mainnav{display:flex; align-items:center; gap:.3rem; background:var(--input); border:1px solid var(--border); padding:.22rem; border-radius:8px; margin:0 auto}
+.tab{border:1px solid transparent; background:transparent; color:var(--muted); font-weight:700; font-size:.82rem; padding:.45rem .95rem; border-radius:6px; cursor:pointer; white-space:nowrap}
+.tab.active{background:var(--primary); color:var(--primary-text)}
+.tab:hover:not(.active){color:var(--text); border-color:var(--muted)}
+.tab:focus-visible,.dots-item:focus-visible,.case-btn:focus-visible{outline:2px solid var(--primary); outline-offset:2px}
+.dots-wrap{position:relative}
+.dots-menu{position:absolute; right:0; top:calc(100% + 10px); width:300px; max-width:86vw; background:var(--topbar); border:1px solid var(--border); border-radius:14px; padding:8px; z-index:90; box-shadow:0 18px 48px rgba(0,0,0,.4); animation:menupop .16s ease; overflow:hidden}
+.dots-menu[hidden]{display:none}
+@keyframes menupop{from{opacity:0; transform:translateY(-6px) scale(.98)}to{opacity:1; transform:none}}
+.dots-item{display:flex; width:100%; align-items:center; gap:.7rem; text-align:left; background:transparent; border:1px solid transparent; color:var(--text); font-size:.87rem; font-weight:650; padding:.55rem .6rem; border-radius:10px; cursor:pointer; font-family:inherit}
+.dots-item:hover,.dots-item:focus-visible{background:var(--input); border-color:var(--border)}
+.dots-ic{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-size:.95rem; font-weight:800; flex-shrink:0; border:1px solid var(--border); background:var(--input)}
+.t-case{background:rgba(47,128,237,.16); color:var(--blue); border-color:var(--blue)}
+.t-space{background:rgba(0,160,106,.14); color:var(--primary); border-color:var(--primary)}
+.t-blank{background:rgba(155,81,224,.15); color:#9b51e0; border-color:#9b51e0}
+.t-cut{background:rgba(235,87,87,.13); color:var(--danger); border-color:var(--danger)}
+.t-find{background:rgba(242,153,74,.15); color:#f2994a; border-color:#f2994a}
+.t-trim{background:rgba(0,160,106,.14); color:var(--primary); border-color:var(--primary)}
+.t-open{background:var(--gold-bg); color:var(--primary); border-color:var(--primary)}
+.t-conv{background:var(--blue-bg); color:var(--blue); border-color:var(--blue)}
+.dots-tx{flex:1; min-width:0}
+.dots-item small{display:block; font-weight:400; color:var(--muted); font-size:.73rem; margin-top:.1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dots-chev{color:var(--muted2); font-size:1rem; opacity:0; transition:opacity .15s}
+.dots-item:hover .dots-chev{opacity:1}
+.dots-sep{height:1px; background:var(--border); margin:.4rem .5rem}
+.dots-head{display:flex; align-items:center; justify-content:space-between; font-size:.68rem; font-weight:800; letter-spacing:.08em; color:var(--muted); padding:.45rem .6rem .25rem; text-transform:uppercase}
+.dots-head .n{font-size:.66rem; background:var(--input); border:1px solid var(--border); border-radius:20px; padding:.05rem .5rem; letter-spacing:0}
+.dots-foot{font-size:.7rem; color:var(--muted2); text-align:center; padding:.35rem 0 .2rem}
+@media(max-width:760px){.dots-menu{position:fixed; right:.7rem; left:.7rem; width:auto; top:60px}}
+.xfer-row{display:flex; gap:.45rem; flex-wrap:wrap; align-items:center; padding:.6rem 1rem; border-top:1px solid var(--border); background:var(--input); font-size:.78rem; color:var(--muted)}
+.case-toolbar{display:flex; gap:.45rem; overflow-x:auto; padding:.6rem .8rem; background:var(--input); border-top:1px solid var(--border); border-bottom:1px solid var(--border)}
+.case-btn{flex:0 0 auto; min-width:86px; background:var(--card); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:.5rem .6rem; cursor:pointer; font-family:inherit; text-align:center}
+.case-btn b{display:block; font-size:.95rem}
+.case-btn span{font-size:.68rem; color:var(--muted); display:block; margin-top:.1rem}
+.case-btn:hover{border-color:var(--primary)}
+.case-btn.applied{border-color:var(--primary); background:var(--gold-bg)}
+#view-case .cleaner-head{padding:.6rem 1rem .15rem}
+#view-case .cleaner-head h2{font-size:.82rem}
+.case-hero{text-align:center; padding:1rem 1rem .2rem}
+.case-hero h1{font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:700; letter-spacing:-.01em; line-height:1.25}
+.case-hero h1 .grad{color:var(--primary)}
+.case-warn{margin:.7rem 1rem 0; font-size:.8rem; line-height:1.6; background:var(--blue-bg); border:1px solid var(--blue); border-radius:8px; padding:.6rem .75rem; color:var(--text)}
+/* Compact cleaning view: hide helper/description texts, keep titles + controls */
+#view-cleaning .cleaner-head p{display:none}
+#view-cleaning .cl-check small{display:none}
+#view-cleaning .hint{display:none}
+/* Minimal cleaning: settings run on defaults while hidden — only boxes + actions show */
+#view-cleaning .cleaner-body > div:not(.cl-grid):not(.cl-actions){display:none}
+#view-cleaning .xfer-row{display:none}
+.flash{animation:flashb 1.2s ease}
+@keyframes flashb{0%,60%{box-shadow:0 0 0 3px var(--primary)}100%{box-shadow:none}}
+@media(max-width:760px){.mainnav{order:3; width:100%; margin-top:.5rem}.topbar-inner{flex-wrap:wrap}.case-btn{min-width:76px}}
 /* ---- Full display / focus mode ---- */
 body.full-display .hero, body.full-display .features, body.full-display footer, body.full-display .divider{display:none}
 body.full-display .wrap{max-width:100%; padding:.8rem clamp(.6rem,1.5vw,1.5rem) 1rem; height:calc(100vh - 53px); display:flex; flex-direction:column}
@@ -216,6 +301,7 @@ body.full-display .modebar{margin-bottom:.7rem}
 body.full-display .card{flex:1; display:flex; flex-direction:column; min-height:0}
 body.full-display .grid{flex:1; min-height:0}
 body.full-display .pane{min-height:0}
+body.full-display .toolview .cl-pane textarea{height:auto; min-height:220px}
 body.full-display textarea{flex:1; height:auto; min-height:0; resize:none; font-size:1.2rem}
 body.full-display .card > div:last-child{padding-top:.5rem}
 @media(max-width:859px){
@@ -232,8 +318,23 @@ body.full-display .card > div:last-child{padding-top:.5rem}
       <img src="logo.png" alt="Bijoy Converter logo">
       <span class="brand-name">Bijoy Converter<small>Unicode ⇄ Bijoy • বাংলা টুল</small></span>
     </a>
+    <nav class="mainnav" role="tablist" aria-label="Main tools">
+      <button id="tab-converter" class="tab active" role="tab" aria-selected="true" aria-controls="view-converter" onclick="showView('converter')">Converter</button>
+      <button id="tab-cleaning" class="tab" role="tab" aria-selected="false" aria-controls="view-cleaning" onclick="showView('cleaning')">Cleaning</button>
+      <button id="tab-case" class="tab" role="tab" aria-selected="false" aria-controls="view-case" onclick="showView('case')" title="Text Case Converter: Sc lc UC CC aC TC iC">Case</button>
+    </nav>
     <div class="top-actions">
       <span class="pill">v2 • OFFLINE</span>
+      <div class="dots-wrap">
+        <button class="icon-btn" id="dots-btn" aria-label="More text tools" aria-haspopup="menu" aria-expanded="false" aria-controls="dots-menu" title="More tools (⋮)" style="font-size:1.15rem;font-weight:800">⋮</button>
+        <div class="dots-menu" id="dots-menu" role="menu" aria-label="Additional text utilities" hidden>
+          <div class="dots-head">Tools <span class="n">3</span></div>
+          <button class="dots-item" role="menuitem" data-goto="converter"><span class="dots-ic t-conv">⇄</span><span class="dots-tx">Converter<small>Unicode ⇄ Bijoy</small></span><span class="dots-chev">›</span></button>
+          <button class="dots-item" role="menuitem" data-goto="cleaning"><span class="dots-ic t-open">🧹</span><span class="dots-tx">Cleaning<small>Advanced text cleaning</small></span><span class="dots-chev">›</span></button>
+          <button class="dots-item" role="menuitem" data-goto="case"><span class="dots-ic t-case">Aa</span><span class="dots-tx">Case<small>Sc • lc • UC • CC • aC • TC • iC</small></span><span class="dots-chev">›</span></button>
+          <div class="dots-foot">Esc to close</div>
+        </div>
+      </div>
       <button class="icon-btn" id="full-btn" onclick="toggleFullDisplay()" title="Full display mode (F)" aria-label="Full display">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
       </button>
@@ -256,26 +357,23 @@ body.full-display .card > div:last-child{padding-top:.5rem}
     </div>
   </section>
 
-  <div class="modebar">
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
-      <div class="mode-switch" role="tablist" aria-label="Conversion direction">
-        <button id="btn-u2b" class="mode-opt active" onclick="setMode('U2B')">Unicode → Bijoy</button>
-        <button id="swap-mini" class="swap-fab" onclick="toggleMode()" title="Swap direction (⇄)" aria-label="Swap">⇄</button>
-        <button id="btn-b2u" class="mode-opt" onclick="setMode('B2U')">Bijoy → Unicode</button>
+  <section class="card toolview" id="view-converter" role="tabpanel" aria-labelledby="tab-converter">
+    <div class="modebar" style="border:0;border-bottom:1px solid var(--border);border-radius:0;margin-bottom:0">
+      <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
+        <div class="mode-switch" role="tablist" aria-label="Conversion direction">
+          <button id="btn-u2b" class="mode-opt active" onclick="setMode('U2B')">Unicode → Bijoy</button>
+          <button id="swap-mini" class="swap-fab" onclick="toggleMode()" title="Swap direction + swap text (⇄)" aria-label="Swap">⇄</button>
+          <button id="btn-b2u" class="mode-opt" onclick="setMode('B2U')">Bijoy → Unicode</button>
+        </div>
+        <div id="mode-display">MODE: <strong>UNICODE → BIJOY</strong></div>
       </div>
-      <div id="mode-display">MODE: <strong>UNICODE → BIJOY</strong></div>
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="convert()">Convert Now</button>
+        <button class="btn btn-ghost" onclick="copyOutput()" title="Copy output">Copy output</button>
+        <button class="btn btn-ghost" onclick="downloadOutput()" title="Download as .txt">Download .txt</button>
+        <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+      </div>
     </div>
-    <div class="toolbar">
-      <button class="btn btn-primary" onclick="convert()">Convert Now</button>
-      <button class="btn btn-ghost" onclick="swapText()" title="Swap input/output text">⇄ Swap text</button>
-      <button class="btn btn-ghost" onclick="copyOutput()" title="Copy output">Copy output</button>
-      <button class="btn btn-ghost" onclick="downloadOutput()" title="Download as .txt">Download .txt</button>
-      <button class="btn btn-ghost" id="full-btn2" onclick="toggleFullDisplay()">⛶ Full display</button>
-      <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
-    </div>
-  </div>
-
-  <section class="card">
     <div class="grid">
       <div class="pane">
         <div class="pane-head">
@@ -309,12 +407,158 @@ body.full-display .card > div:last-child{padding-top:.5rem}
       </div>
     </div>
     <div class="divider">tip — paste a Word / newspaper paragraph and hit Convert</div>
-    <div style="padding:.7rem 1rem; display:flex; gap:.5rem; flex-wrap:wrap; border-top:1px solid var(--border)">
-      <button class="btn btn-ghost" onclick="swapText()" title="Swap input/output text">⇄ Swap text</button>
-      <button class="btn btn-ghost" onclick="copyOutput()">Copy output</button>
-      <button class="btn btn-ghost" onclick="downloadOutput()">Download .txt</button>
-      <span style="flex:1"></span>
-      <button class="btn btn-danger-ghost" onclick="clearAll()">Clear all</button>
+    <div class="xfer-row">Send:
+      <button class="mini" onclick="sendConverterToCleaner('input')" title="Send converter input to Cleaner">Input → Cleaner</button>
+      <button class="mini" onclick="sendConverterToCleaner('output')" title="Send converter output to Cleaner">Output → Cleaner</button>
+      <button class="mini" onclick="sendConverterToCase('input')" title="Send converter input to Case converter">Input → Case</button>
+      <button class="mini" onclick="sendConverterToCase('output')" title="Send converter output to Case converter">Output → Case</button>
+    </div>
+  </section>
+
+  <!-- ============ ADVANCED TEXT CLEANING (add-on module) ============ -->
+  <section class="card cleaner-card toolview" id="view-cleaning" role="tabpanel" aria-labelledby="tab-cleaning" hidden>
+    <div class="cleaner-head">
+      <h2>🧹 Advanced Text Cleaning <span class="badge u">UNICODE + BIJOY SAFE</span></h2>
+      <p>MS Word-এর <b>Find &amp; Replace</b> স্টাইলে টেক্সট পরিষ্কার করুন। বাংলা হরফ, কার, ফলা বা Bijoy কোড নষ্ট হয় না — শুধু নির্বাচিত rule প্রয়োগ হয়। Codes: <code>^p</code>=Enter &nbsp;<code>^l</code>=Line break &nbsp;<code>^t</code>=Tab</p>
+    </div>
+    <div class="cleaner-body">
+      <div class="cl-grid">
+        <div class="cl-pane">
+          <div class="cl-label"><span>Original Text (Before)</span><span class="cl-stat" id="cl-in-stat">0 chars</span></div>
+          <textarea id="cl-input" placeholder="এখানে Unicode বা Bijoy টেক্সট পেস্ট করুন…"></textarea>
+          <div class="cl-row">
+            <button class="mini" onclick="cleanerPull('input')" title="Converter input থেকে আনুন">⇩ Converter input</button>
+            <button class="mini" onclick="cleanerPull('output')" title="Converter output থেকে আনুন">⇩ Converter output</button>
+            <button class="mini" onclick="cleanerClear()" title="Clear cleaner boxes">✕</button>
+          </div>
+        </div>
+        <div class="cl-pane">
+          <div class="cl-label"><span>Cleaned Text (After)</span><span class="cl-stat" id="cl-out-stat">0 chars</span></div>
+          <textarea id="cl-output" readonly placeholder="Clean করার পর ফলাফল এখানে দেখা যাবে…"></textarea>
+          <div class="cl-row">
+            <button class="mini" onclick="cleanerCopy()" title="Copy cleaned text">Copy cleaned</button>
+            <button class="mini" onclick="cleanerSend()" title="Cleaned text converter input-এ পাঠান">⇧ Send to converter</button>
+            <button class="mini" onclick="cleanerUndo()" title="আগের text ফিরিয়ে আনুন">↩ Undo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-opts" role="group" aria-label="Cleaning options">
+        <label class="cl-check"><input type="checkbox" id="opt-collapse" checked><span>Multiple Enter → Single Enter <small>পরপর Enter একটিতে নামিয়ে আনে (^p^p → ^p, loop)</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-blanksingle"><span>Keep max one blank line <small>শুধু যখন উপরের option বন্ধ থাকে; ৩+ Enter → ১টি blank line</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-removeall"><span>Remove ALL blank lines <small>ফাঁকা লাইন পুরোপুরি মুছে ফেলে</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-spaces" checked><span>Remove extra spaces <small>একাধিক space → একটি space</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-trimlines" checked><span>Trim line start/end spaces <small>প্রতি লাইনের শুরু-শেষের space কাটে</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-specials" checked><span>Remove special characters <small>নিচে selected char গুলো মুছে ফেলে</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-findrep" checked><span>Custom Find &amp; Replace <small>নিচের rule গুলো loop দিয়ে প্রয়োগ করে</small></span></label>
+        <label class="cl-check"><input type="checkbox" id="opt-trimtext" checked><span>Trim text start/end <small>পুরো text-এর শুরু-শেষের space/Enter কাটে</small></span></label>
+      </div>
+
+      <div>
+        <div class="cl-label" style="margin-bottom:.4rem"><span>Special characters (যেগুলো মুছতে চান টিক দিন)</span></div>
+        <div class="cl-row" id="cl-specials">
+          <label class="cl-chip"><input type="checkbox" data-ch="*" checked> <code>*</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="#" checked> <code>#</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="[" checked> <code>[</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="]" checked> <code>]</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="@"> <code>@</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="%"> <code>%</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="&amp;"> <code>&amp;</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="$"> <code>$</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="~"> <code>~</code></label>
+          <label class="cl-chip"><input type="checkbox" data-ch="^"> <code>^</code></label>
+        </div>
+      </div>
+
+      <div>
+        <div class="cl-label" style="margin-bottom:.4rem"><span>Custom characters (নিজের মতো লিখুন)</span></div>
+        <div class="cl-row">
+          <input class="cl-input" id="cl-custom" placeholder="যেমন: *#[ ]@%&$  (space দিয়ে আলাদা করুন — space মুছবে না)">
+        </div>
+      </div>
+
+      <div>
+        <div class="cl-label" style="margin-bottom:.4rem"><span>Find &amp; Replace rules (Word style — ^p ^l ^t supported, repeat/loop)</span></div>
+        <div style="display:flex; flex-direction:column; gap:.45rem" id="cl-rules">
+          <div class="cl-rule">
+            <input class="cl-find" value="^p^p" aria-label="Find what">
+            <span style="color:var(--muted)">→</span>
+            <input class="cl-rep" value="^p" aria-label="Replace with">
+            <button class="mini" onclick="cleanerDelRule(this)" title="Remove rule">✕</button>
+          </div>
+        </div>
+        <div class="cl-row" style="margin-top:.5rem">
+          <button class="mini" onclick="cleanerAddRule('', '')">＋ Add rule</button>
+          <span class="hint">Tip: <kbd>^^</kbd> লিখলে আসল <kbd>^</kbd> বোঝায় (যেমন Find <kbd>^^p</kbd> = লেখার ভেতরের "^p")</span>
+        </div>
+      </div>
+
+      <div class="cl-actions">
+        <button class="btn btn-primary" onclick="cleanerClean()">🧹 Clean Text</button>
+        <button class="btn btn-ghost" onclick="cleanerUndo()">↩ Undo / Restore Original</button>
+        <button class="btn btn-ghost" onclick="cleanerCopy()">Copy Cleaned Text</button>
+        <span style="flex:1"></span>
+        <span class="cl-stat" id="cl-msg">Default: extra space + blank line + ^p^p→^p + specials + trim</span>
+      </div>
+    </div>
+    <div class="xfer-row">Send:
+      <button class="mini" onclick="sendCleanerToConverter()" title="Send cleaned text to converter">Cleaned → Converter</button>
+      <button class="mini" onclick="sendCleanerToCase()" title="Send cleaned text to Case converter">Cleaned → Case</button>
+    </div>
+  </section>
+
+  <!-- ============ TEXT CASE CONVERTER (Sc lc UC CC aC TC iC) ============ -->
+  <section class="card toolview" id="view-case" role="tabpanel" aria-labelledby="tab-case" aria-label="Text case converter" hidden>
+    <div class="case-hero"><h1>Case Converter</h1></div>
+    <div class="cleaner-head">
+      <h2>📝 Text Case Converter <span class="badge u">ENGLISH ONLY • BANGLA UNCHANGED</span></h2>
+    </div>
+    <div class="cleaner-body">
+      <div class="cl-grid">
+        <div class="cl-pane">
+          <div class="cl-label"><span>Input Text</span><span class="cl-stat" id="cs-in-stat">0 chars • 0 words</span></div>
+          <textarea id="cs-input" placeholder="Paste English text here… বাংলা থাকলে অপরিবর্তিত থাকবে (English-only)"></textarea>
+          <div class="cl-row">
+            <button class="mini" onclick="casePaste()" title="Paste from clipboard">Paste</button>
+            <button class="mini" onclick="caseClearInput()" title="Clear case input">✕ Clear</button>
+            <button class="mini" onclick="sendConverterToCase('input')" title="Pull converter input">⇩ Conv input</button>
+            <button class="mini" onclick="sendCleanerToCase()" title="Pull cleaned text">⇩ Cleaned</button>
+          </div>
+        </div>
+        <div class="cl-pane">
+          <div class="cl-label"><span>Converted Output</span><span class="cl-stat" id="cs-out-stat">0 chars • 0 words</span></div>
+          <textarea id="cs-output" readonly placeholder="Converted text appears here…"></textarea>
+          <div class="cl-row">
+            <button class="mini" onclick="caseCopy()" title="Copy converted text">Copy output</button>
+            <button class="mini" onclick="caseReplace()" title="Replace input with output">⇧ Input ← Output</button>
+            <button class="mini" onclick="caseDownload()" title="Download as .txt">TXT</button>
+          </div>
+        </div>
+      </div>
+      <div class="cl-label" style="margin-bottom:.1rem"><span>Case conversion toolbar</span></div>
+    </div>
+    <div class="case-toolbar" role="group" aria-label="Case conversion options">
+      <button class="case-btn" data-case="sentence" title="Sentence case: Hello world. Welcome to bangladesh."><b>Sc</b><span>Sentence case</span></button>
+      <button class="case-btn" data-case="lower" title="lower case: hello world"><b>lc</b><span>lower case</span></button>
+      <button class="case-btn" data-case="upper" title="UPPER CASE: HELLO WORLD"><b>UC</b><span>UPPER CASE</span></button>
+      <button class="case-btn" data-case="capitalized" title="Capitalized Case: Hello World From Bangladesh"><b>CC</b><span>Capitalized Case</span></button>
+      <button class="case-btn" data-case="alternating" title="aLtErNaTiNg cAsE: hElLo WoRlD"><b>aC</b><span>aLtErNaTiNg</span></button>
+      <button class="case-btn" data-case="title" title="Title Case: The Quick Brown Fox Jumps over the Lazy Dog"><b>TC</b><span>Title Case</span></button>
+      <button class="case-btn" data-case="inverse" title="iNvErSe CaSe: hELLO world"><b>iC</b><span>iNvErSe CaSe</span></button>
+    </div>
+    <div class="cleaner-body">
+      <div class="cl-actions">
+        <button class="btn btn-ghost" onclick="caseUndo()" title="Restore previous input">↩ Undo</button>
+        <button class="btn btn-ghost" onclick="caseReset()" title="Clear input, output and reset toolbar">Reset</button>
+        <button class="btn btn-ghost" onclick="caseCopy()">Copy Output</button>
+        <span style="flex:1"></span>
+        <span class="cl-stat" id="cs-msg">Pick Sc / lc / UC / CC / aC / TC / iC</span>
+      </div>
+    </div>
+    <div class="xfer-row">Send:
+      <button class="mini" onclick="sendCaseToConverter()" title="Send case output to converter">Case → Converter</button>
+      <button class="mini" onclick="sendCaseToCleaner()" title="Send case output to cleaner">Case → Cleaner</button>
+      <button class="mini" onclick="caseSwap()" title="Swap case input and output">⇄ Swap</button>
     </div>
   </section>
 
@@ -334,5 +578,9 @@ body.full-display .card > div:last-child{padding-top:.5rem}
 
 <script src="converter.js"></script>
 <script src="script.js"></script>
+<script src="cleaner.js"></script>
+<script src="cleaner-ui.js"></script>
+<script src="case-converter.js"></script>
+<script src="views.js"></script>
 </body>
 </html>
