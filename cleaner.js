@@ -108,7 +108,10 @@
   }
 
   function escapeRegExp(s) {
-    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // NOTE: '-' must be escaped — inside a [...] class an unescaped
+    // hyphen between two chars forms a RANGE (e.g. custom "-x" after
+    // "*#[]" silently ate all lowercase a–w). Found by unit test.
+    return s.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&');
   }
 
   // Remove exactly the selected literal characters (no regex side effects).

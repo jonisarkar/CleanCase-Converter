@@ -53,6 +53,10 @@ function toggleMode() {
 // Swap input/output WITHOUT converting (same-mode swap must not
 // re-convert already-converted text, which would corrupt it).
 function swapTextSilent() {
+  // Nothing converted yet (e.g. fresh type + instant toggle) — swapping
+  // with an empty output would wipe the input, so keep it and just
+  // let the caller convert fresh in the new mode.
+  if (!outputArea.value) return;
   const t = inputArea.value;
   inputArea.value = outputArea.value;
   outputArea.value = t;
@@ -110,27 +114,63 @@ inputArea.addEventListener('input', () => {
   tId = setTimeout(convert, 120);
 });
 
-// Ctrl+Enter to convert
+// Ctrl+Enter to convert — converter view only (was hijacking the
+// shortcut while typing in the Cleaning / Case workspaces).
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    const cv = document.getElementById('view-converter');
+    if (cv && cv.hasAttribute('hidden')) return;
     e.preventDefault();
     convert();
     showToast('Converted ✓');
   }
 });
 
+// Undoable Clear — destructive actions must be recoverable (UX guideline).
+// Stashes text before wipe; an "Undo clear" button appears for 8 seconds.
+let lastCleared = null;
+let undoClearTimer = null;
+
+function stashCleared() {
+  if (!inputArea.value && !outputArea.value) return false;
+  lastCleared = { input: inputArea.value, output: outputArea.value };
+  const b = document.getElementById('undo-clear-btn');
+  if (b) {
+    b.hidden = false;
+    clearTimeout(undoClearTimer);
+    undoClearTimer = setTimeout(() => { b.hidden = true; lastCleared = null; }, 8000);
+  }
+  return true;
+}
+
+function undoClear() {
+  const b = document.getElementById('undo-clear-btn');
+  if (!lastCleared) { showToast('Nothing to restore'); return; }
+  inputArea.value = lastCleared.input || '';
+  lastCleared = null;
+  if (b) b.hidden = true;
+  clearTimeout(undoClearTimer);
+  convert();
+  inputArea.focus();
+  showToast('Restored ↩');
+}
+
 function clearInput() {
+  const had = stashCleared();
   inputArea.value = '';
   outputArea.value = '';
   inputArea.focus();
   updateCounts();
+  if (had) showToast('Cleared — Undo available ✓');
 }
 
 function clearAll() {
+  const had = stashCleared();
   inputArea.value = '';
   outputArea.value = '';
   updateCounts();
   inputArea.focus();
+  if (had) showToast('Cleared — Undo available ✓');
 }
 
 async function pasteInput() {
@@ -182,22 +222,84 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-// Theme: persist in localStorage
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  const moon = document.getElementById('theme-icon-moon');
-  const sun = document.getElementById('theme-icon-sun');
-  if (moon && sun) {
-    const isDark = theme === 'dark';
-    moon.style.display = isDark ? 'block' : 'none';
-    sun.style.display = isDark ? 'none' : 'block';
-  }
-  try { localStorage.setItem('bijoy-theme', theme); } catch (e) {}
+// Theme: manual override + Auto (follow phone / OS color scheme).
+// Storage: 'bijoy-theme' = explicit 'dark'/'light', 'bijoy-theme-auto' = '1'.
+const themeMedia = (window.matchMedia)
+  ? window.matchMedia('(prefers-color-scheme: dark)')
+  : null;
+
+function systemTheme() {
+  return (themeMedia && themeMedia.matches) ? 'dark' : 'light';
 }
 
+function isThemeAuto() {
+  try { return localStorage.getItem('bijoy-theme-auto') === '1'; }
+  catch (e) { return false; }
+}
+
+function savedTheme() {
+  try { return localStorage.getItem('bijoy-theme'); } catch (e) { return null; }
+}
+
+// Paint only (no persistence) — shared by manual + auto paths.
+function paintTheme(theme, auto) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const isDark = theme === 'dark';
+  const moon = document.getElementById('theme-icon-moon');
+  const sun = document.getElementById('theme-icon-sun');
+  const autoIc = document.getElementById('theme-icon-auto');
+  if (moon) moon.style.display = (!auto && isDark) ? 'block' : 'none';
+  if (sun) sun.style.display = (!auto && !isDark) ? 'block' : 'none';
+  if (autoIc) autoIc.style.display = auto ? 'block' : 'none';
+  const tBtn = document.getElementById('theme-btn');
+  if (tBtn) {
+    tBtn.title = auto
+      ? ('Auto theme • now ' + theme + ' (tap for manual)')
+      : (isDark ? 'Dark — tap for light' : 'Light — tap for dark');
+    tBtn.setAttribute('aria-label', tBtn.title);
+  }
+  const aBtn = document.getElementById('theme-auto-btn');
+  if (aBtn) {
+    aBtn.setAttribute('aria-pressed', auto ? 'true' : 'false');
+    aBtn.classList.toggle('auto-on', !!auto);
+  }
+}
+
+// Back-compat: explicit theme + persist (used by toggle).
+function applyTheme(theme) {
+  try {
+    localStorage.setItem('bijoy-theme', theme);
+    localStorage.removeItem('bijoy-theme-auto');
+  } catch (e) {}
+  paintTheme(theme, false);
+}
+
+// Manual toggle — disables Auto and remembers the choice.
 function toggleTheme() {
   const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-  applyTheme(cur === 'dark' ? 'light' : 'dark');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  showToast(next === 'dark' ? 'Dark theme ✓ (Auto off)' : 'Light theme ✓ (Auto off)');
+}
+
+// Auto mode — forget manual choice, follow the phone/OS live.
+function enableAutoTheme(silent) {
+  try {
+    localStorage.setItem('bijoy-theme-auto', '1');
+    localStorage.removeItem('bijoy-theme');
+  } catch (e) {}
+  paintTheme(systemTheme(), true);
+  if (!silent) showToast('Auto theme ON — follows phone ✓');
+}
+
+// OS theme changed (e.g. sunset / Control Centre) → follow if in Auto
+// or if the user never picked a theme manually.
+if (themeMedia) {
+  const onSystemChange = () => {
+    if (isThemeAuto() || !savedTheme()) paintTheme(systemTheme(), true);
+  };
+  if (themeMedia.addEventListener) themeMedia.addEventListener('change', onSystemChange);
+  else if (themeMedia.addListener) themeMedia.addListener(onSystemChange);
 }
 
 // Full display / focus mode — CSS-only layout (no Fullscreen API, so Esc
@@ -222,9 +324,11 @@ document.addEventListener('keydown', (e) => {
 });
 
 (function init() {
-  let saved = 'dark';
-  try { saved = localStorage.getItem('bijoy-theme') || 'dark'; } catch (e) {}
-  applyTheme(saved);
+  // Fresh users (or Auto mode) follow the phone/OS theme live;
+  // manual choice is respected once the user taps the theme button.
+  const s = savedTheme();
+  if (isThemeAuto() || !s) enableAutoTheme(true);
+  else paintTheme(s === 'light' ? 'light' : 'dark', false);
   setMode('U2B');
   updateCounts();
 })();

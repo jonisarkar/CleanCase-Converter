@@ -234,6 +234,14 @@
         return;
       }
     } catch (e) {}
+    // Bijoy safety: legacy Bijoy text IS ASCII bytes, so case-converting
+    // corrupts it. Non-blocking ⚠ warning (banner above explains why).
+    try {
+      if (window.CaseConverter.looksLikeBijoyRisk &&
+          window.CaseConverter.looksLikeBijoyRisk(input.value, currentModeSafe())) {
+        toast('⚠ Looks like Bijoy bytes — case may corrupt it');
+      }
+    } catch (e) {}
     pushCsHistory(input.value);
     try {
       output.value = fn(input.value);

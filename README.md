@@ -1,6 +1,6 @@
-# Bijoy ⇄ Unicode Converter — Fast & Accurate Bangla Tool
+# CleanCase Converter — Fast & Accurate Bangla Tool
 
-Free, fast, offline Bangla **Unicode ⇄ Bijoy (SutonnyMJ)** converter with **Advanced Text Cleaning** and **Text Case Converter (Sc lc UC CC aC TC iC)**.
+Free, fast, offline **CleanCase Converter**: Bangla **Unicode ⇄ Bijoy (SutonnyMJ)** converter with **Advanced Text Cleaning** and **Text Case Converter (Sc lc UC CC aC TC iC)**.
 
 No signup. No server. Runs 100% locally in the browser.
 
@@ -14,17 +14,13 @@ No signup. No server. Runs 100% locally in the browser.
 
 ## Three-dot menu (⋮, header)
 
-Compact dropdown, closes on select / outside-click / `Escape`:
+Compact dropdown, closes on select / outside-click / `Escape` — jumps between the 3 tool views:
 
-- 📝 Text Case Converter → Case view
-- ␣ Remove Extra Spaces → quick clean on active input
-- ¶ Remove Blank Lines → quick clean (multiple Enter → single)
-- ✂ Remove Special Characters → quick clean (ticked + custom chars)
-- 🔍 Find & Replace → Cleaning view, focuses rule row with flash highlight
-- ✧ Trim Text → quick clean (trim text + line edges)
-- 🧹 Open Cleaning / ⇄ Open Converter → switch views
+- ⇄ Converter → Converter view (Unicode ⇄ Bijoy)
+- 🧹 Cleaning → Cleaning view (advanced text cleaning)
+- `Aa` Case → Case view (Sc • lc • UC • CC • aC • TC • iC)
 
-Quick cleans reuse `BijoyTextCleaner` (no duplicated logic) and operate on the active view's input (Converter → `input-text`, Cleaning → `cl-input`, Case → `cs-input`).
+(`views.js` also ships reusable `quickClean()` helpers on top of `BijoyTextCleaner` — ready to wire to future menu items; no duplicated logic.)
 
 ## Text Case Converter (7 options, English-only)
 
@@ -42,7 +38,7 @@ Converts **A–Z / a–z only**. Bangla text (`U+0980–U+09FF`), ZWJ/ZWNJ, vowe
 
 Workspace: input (Paste / Clear / chars+words), 7-button toolbar (horizontally scrollable on mobile, `applied` highlight), output (Copy / Input ← Output / TXT download), Undo (25-step) / Reset / Swap. Bangla Unicode (`U+0980–U+09FF`), ZWJ/ZWNJ, vowel signs are never touched.
 
-**Bijoy safety:** Bijoy legacy text is ASCII bytes — case-converting corrupts it. `CaseConverter.looksLikeBijoyRisk()` blocks apply when risk is detected (no Bangla Unicode + ASCII letters + `B2U` mode or Bijoy-ish bytes `~ \` _ ^ { }`) unless `I understand Bijoy risk` is ticked. A persistent warning banner is always shown.
+**Bijoy safety:** Bijoy legacy text is ASCII bytes — case-converting corrupts it. When `CaseConverter.looksLikeBijoyRisk()` fires (no Bangla Unicode + ASCII letters + `B2U` mode or Bijoy-ish bytes `~ \` _ ^ { }`), a ⚠ warning toast is shown before applying (non-blocking), and a persistent warning banner sits above the Case workspace.
 
 ## Features
 
@@ -52,6 +48,7 @@ Workspace: input (Paste / Clear / chars+words), 7-button toolbar (horizontally s
 - Proper re-ordering of reph, kar & jukto-borno for print-ready Bijoy
 - Char + word counters for input/output
 - `Copy output`, `Download .txt`, `Paste`, `Clear`
+- `Clear` is **undoable** — an `Undo clear` button appears for 8 seconds after every wipe
 - Swap direction + swap text with `⇄` button
 - `Ctrl + Enter` to convert instantly
 
@@ -80,9 +77,11 @@ Integration:
 - `↩ Undo` restores original
 
 ### 3. UI / UX
-- Dark / Light theme (persisted in `localStorage`)
+- Dark / Light theme with **Auto mode** (◐ button) — follows the phone/OS color scheme live; manual toggle remembers your choice in `localStorage` (`bijoy-theme` / `bijoy-theme-auto`)
 - Full display / focus mode (`F` key or expand button)
-- Flat design, responsive (1-col mobile, 2-col desktop)
+- Glassmorphism + royal blue theme, responsive (1-col mobile, 2-col desktop)
+- 44px touch targets on touch devices; single blue accent family in both themes
+- Static (animation-free) mesh background + instant CSS tap feedback — fast on low-end phones (no per-frame GPU work, no JS on tap)
 - Toast notifications
 - Bundled local fonts — no install needed:
   - `Bangla.ttf` → Unicode (`BanglaLocal`)
@@ -123,6 +122,19 @@ npx serve .
 ```
 
 Works offline after first load (Google Fonts excepted — local Bangla/SutonnyMJ fonts work fully offline).
+
+## PWA (Install App)
+
+Installable + fully offline via `manifest.webmanifest` + `sw.js` (cache-first app shell, runtime-cached Google Fonts, `icon-192.png` / `icon-512.png` generated from `logo.png`):
+
+1. Serve over `http(s)` — service workers do **not** run on `file://`:
+```powershell
+python -m http.server 8000
+# then open http://localhost:8000/
+```
+2. After first load, an **Install** (⤓) button appears in the header (Chrome/Edge/Android). Tap it to install.
+3. iPhone/Safari: Share → **Add to Home Screen** (uses `icon-192.png` + standalone display).
+4. To force-update the offline cache after editing files, bump `CACHE` in `sw.js` (e.g. `cleancase-v3`).
 
 ## Usage
 

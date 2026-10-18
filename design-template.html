@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanCase Converter — Glassmorphism Royal Blue Template (preview)</title>
+<meta name="description" content="Glassmorphism + royal blue design template proposal for CleanCase Converter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CleanCase DESIGN TEMPLATE v2 — Glassmorphism + Royal Blue
+   Static mesh background (fast: zero animations) + frosted
+   glass surfaces. Tokens: primitive → semantic → component.
+   ============================================================ */
+:root{
+  color-scheme:light;
+  --blue-700:#1D4ED8; --blue-600:#2563EB; --blue-500:#3B82F6;
+  --blue-100:#DBEAFE; --blue-50:#EFF6FF;
+  --ink-900:#0F172A; --ink-600:#334155; --ink-400:#64748B;
+  --white:#FFFFFF;
+  --bg-base:var(--blue-50);
+  --glass:rgba(255,255,255,.62);
+  --glass-strong:rgba(255,255,255,.78);
+  --glass-border:rgba(255,255,255,.7);
+  --text:var(--ink-900); --text-2:var(--ink-600); --text-3:var(--ink-400);
+  --primary:var(--blue-700); --primary-hover:#1E40AF; --on-primary:var(--white);
+  --primary-soft:var(--blue-100);
+  --danger:#DC2626;
+  --glass-shadow:0 8px 32px rgba(29,78,216,.14);
+  --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-6:1.5rem; --space-8:2rem; --space-12:3rem;
+  --fs-xs:.75rem; --fs-sm:.875rem; --fs-base:1rem; --fs-xl:1.25rem; --fs-3xl:1.875rem;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --btn-bg:var(--primary); --btn-fg:var(--on-primary);
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --glass:rgba(15,23,42,.55);
+  --glass-strong:rgba(15,23,42,.72);
+  --glass-border:rgba(148,163,184,.28);
+  --text:#F1F5FD; --text-2:#94A3B8; --text-3:#64748B;
+  --primary:#60A5FA; --primary-hover:#93C5FD; --on-primary:#0F172A;
+  --primary-soft:rgba(59,130,246,.22);
+  --danger:#F87171;
+  --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  --btn-bg:#3B82F6; --btn-fg:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto','Hind Siliguri',system-ui,sans-serif; color:var(--text); min-height:100vh}
+/* Static blue mesh — painted once, no animation = fast */
+body{background:
+  radial-gradient(900px 480px at 8% -60px, rgba(59,130,246,.5), transparent 65%),
+  radial-gradient(800px 460px at 95% 10%, rgba(168,85,247,.42), transparent 65%),
+  radial-gradient(760px 520px at 50% 110%, rgba(34,211,238,.4), transparent 65%),
+  linear-gradient(160deg, #DBEAFE 0%, #EFF6FF 45%, #F5F3FF 100%);
+  background-attachment:fixed;
+}
+[data-theme="dark"] body{background:
+  radial-gradient(900px 480px at 8% -60px, rgba(37,99,235,.5), transparent 65%),
+  radial-gradient(800px 460px at 95% 10%, rgba(124,58,237,.42), transparent 65%),
+  radial-gradient(760px 520px at 50% 110%, rgba(8,145,178,.38), transparent 65%),
+  linear-gradient(160deg, #020617 0%, #0B1530 55%, #150F33 100%);
+  background-attachment:fixed;
+}
+.glass{background:var(--glass); backdrop-filter:blur(22px) saturate(1.5); -webkit-backdrop-filter:blur(22px) saturate(1.5);
+  border:1px solid var(--glass-border); box-shadow:var(--glass-shadow)}
+.wrap{max-width:1120px; margin:0 auto; padding:var(--space-6) var(--space-4) var(--space-12)}
+.sec-label{font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-2); margin:var(--space-12) 0 var(--space-4); display:flex; align-items:center; gap:var(--space-2)}
+.sec-label::after{content:""; flex:1; height:1px; background:var(--glass-border)}
+
+/* Banner */
+.tpl-banner{background:rgba(29,78,216,.85); color:#fff; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); font-size:var(--fs-sm)}
+[data-theme="dark"] .tpl-banner{background:rgba(15,23,42,.7)}
+.tpl-banner .wrap{padding-top:var(--space-2); padding-bottom:var(--space-2); display:flex; gap:var(--space-3); align-items:center; justify-content:space-between; flex-wrap:wrap}
+.tpl-banner button{background:transparent; border:1px solid currentColor; color:inherit; border-radius:var(--radius-pill); padding:.3rem .9rem; font:inherit; font-size:var(--fs-xs); font-weight:700; cursor:pointer}
+
+/* Mock app bar */
+.mock-bar{border-radius:var(--radius-lg); padding:var(--space-3) var(--space-4); display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap}
+.brand{display:flex; align-items:center; gap:var(--space-2); font-weight:700}
+.brand-dot{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg,var(--blue-600),#7C3AED); color:#fff; display:grid; place-items:center; font-weight:700; box-shadow:0 4px 14px rgba(37,99,235,.4)}
+.brand small{display:block; font-weight:400; color:var(--text-2); font-size:var(--fs-xs)}
+.tabs{display:flex; gap:2px; margin:0 auto; background:rgba(127,127,127,.12); border-radius:var(--radius-pill); padding:3px}
+.tab{border:0; background:transparent; color:var(--text-2); font:inherit; font-size:var(--fs-sm); font-weight:500; padding:.5rem 1rem; border-radius:var(--radius-pill); cursor:pointer}
+.tab.active{background:var(--glass-strong); color:var(--primary); font-weight:700; box-shadow:0 2px 8px rgba(0,0,0,.12)}
+
+/* Hero */
+.hero{text-align:center; max-width:640px; margin:var(--space-8) auto}
+.hero h1{font-family:'Noto Serif Bengali','Hind Siliguri',serif; font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:-.01em}
+.hero h1 .accent{background:linear-gradient(90deg,var(--blue-600),#7C3AED); -webkit-background-clip:text; background-clip:text; color:transparent}
+[data-theme="dark"] .hero h1 .accent{background:linear-gradient(90deg,#93C5FD,#C4B5FD); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero p{color:var(--text-2); margin-top:var(--space-2)}
+.chips{display:flex; gap:var(--space-2); justify-content:center; flex-wrap:wrap; margin-top:var(--space-3)}
+.chip{font-size:var(--fs-xs); font-weight:500; color:var(--text-2); background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-border); border-radius:var(--radius-pill); padding:.4rem .85rem}
+
+/* Converter card */
+.card{border-radius:var(--radius-lg); overflow:hidden}
+.modebar{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); flex-wrap:wrap; padding:var(--space-3) var(--space-4); border-bottom:1px solid var(--glass-border); background:rgba(127,127,127,.08)}
+.segmented{display:flex; background:rgba(127,127,127,.14); border-radius:var(--radius-pill); padding:3px}
+.segmented button{border:0; background:transparent; color:var(--text-2); font:inherit; font-size:var(--fs-sm); font-weight:500; padding:.5rem 1rem; border-radius:var(--radius-pill); cursor:pointer}
+.segmented button.active{background:var(--btn-bg); color:#fff; font-weight:700; box-shadow:0 2px 10px rgba(37,99,235,.45)}
+[data-theme="dark"] .segmented button.active{color:#fff}
+.grid{display:grid; grid-template-columns:1fr}
+@media(min-width:820px){.grid{grid-template-columns:1fr 1fr}}
+.pane{padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-2)}
+.pane + .pane{border-top:1px solid var(--glass-border)}
+@media(min-width:820px){.pane + .pane{border-top:0; border-left:1px solid var(--glass-border)}}
+.pane-title{font-size:var(--fs-xs); font-weight:700; letter-spacing:.07em; text-transform:uppercase; display:flex; gap:var(--space-2); align-items:center}
+.badge{font-size:.66rem; font-weight:700; letter-spacing:.05em; padding:.2rem .55rem; border-radius:6px}
+.badge.u{background:var(--primary-soft); color:var(--primary)}
+.badge.b{background:rgba(168,85,247,.18); color:#7C3AED}
+[data-theme="dark"] .badge.b{color:#C4B5FD}
+textarea{width:100%; height:150px; resize:vertical; background:rgba(127,127,127,.1); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:var(--space-3); color:var(--text); font-family:'Hind Siliguri',sans-serif; font-size:1.05rem; line-height:1.8}
+textarea:focus{outline:none; border-color:var(--primary); background:rgba(127,127,127,.16)}
+.count{font-size:var(--fs-xs); color:var(--text-2)}
+.count b{color:var(--text)}
+
+/* Component sheet */
+.sheet{border-radius:var(--radius-lg); padding:var(--space-6) var(--space-4); display:flex; flex-direction:column; gap:var(--space-4)}
+.row{display:flex; gap:var(--space-2); flex-wrap:wrap; align-items:center}
+.row-title{font-size:var(--fs-xs); font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-2); width:110px; flex-shrink:0}
+.btn{display:inline-flex; align-items:center; gap:.45rem; min-height:42px; padding:0 1.2rem; border-radius:var(--radius-pill); font:inherit; font-size:var(--fs-sm); font-weight:600; border:0; cursor:pointer; background:var(--btn-bg); color:#fff; box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--glass-strong); color:var(--primary); border:1px solid var(--glass-border); box-shadow:none}
+.btn.danger-ghost{background:transparent; color:var(--danger); border:1px solid var(--glass-border); box-shadow:none}
+.mini{font:inherit; font-size:var(--fs-xs); font-weight:500; min-height:34px; padding:.3rem .85rem; border-radius:var(--radius-pill); background:var(--glass-strong); border:1px solid var(--glass-border); color:var(--primary); cursor:pointer}
+.input{flex:1; min-width:200px; min-height:42px; background:rgba(127,127,127,.1); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:.5rem .75rem; color:var(--text); font:inherit; font-size:var(--fs-sm)}
+.input:focus{outline:none; border-color:var(--primary)}
+.switch{position:relative; width:46px; height:27px; flex-shrink:0}
+.switch input{position:absolute; opacity:0; inset:0; margin:0; cursor:pointer}
+.switch .track{position:absolute; inset:0; border-radius:20px; background:rgba(127,127,127,.3); border:1px solid var(--glass-border)}
+.switch .thumb{position:absolute; top:50%; left:5px; transform:translateY(-50%); width:17px; height:17px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.switch input:checked ~ .track{background:var(--blue-600); border-color:transparent}
+.switch input:checked ~ .thumb{left:22px}
+.switch input:focus-visible ~ .track{outline:2px solid var(--primary); outline-offset:2px}
+
+/* Token swatches */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:var(--space-2)}
+.swatch{border:1px solid var(--glass-border); border-radius:var(--radius-md); overflow:hidden; background:var(--glass)}
+.swatch i{display:block; height:52px}
+.swatch span{display:block; font-size:var(--fs-xs); padding:.35rem .5rem; color:var(--text-2)}
+.swatch b{color:var(--text)}
+.type-row{border-bottom:1px solid var(--glass-border); padding:var(--space-2) 0}
+.type-row small{display:block; color:var(--text-2); font-size:var(--fs-xs)}
+.space-bar{display:flex; align-items:center; gap:var(--space-3); font-size:var(--fs-xs); color:var(--text-2)}
+.space-bar i{display:block; height:12px; background:linear-gradient(90deg,var(--blue-600),#7C3AED)}
+footer{margin-top:var(--space-12); text-align:center; color:var(--text-2); font-size:var(--fs-sm)}
+footer code{background:var(--glass); border:1px solid var(--glass-border); border-radius:6px; padding:.05rem .4rem; font-size:var(--fs-xs)}
+@media (pointer:coarse){.mini{min-height:44px} .btn{min-height:44px}}
+</style>
+</head>
+<body>
+
+<div class="tpl-banner"><div class="wrap" style="max-width:1120px">
+  <span><b>DESIGN TEMPLATE v2</b> — Glassmorphism + Royal Blue · frosted glass · static mesh (fast) · preview only</span>
+  <button onclick="tplToggle()">🌙 / ☀️ theme</button>
+</div></div>
+
+<main class="wrap">
+
+  <div class="sec-label">01 · App header (glass)</div>
+  <div class="mock-bar glass">
+    <div class="brand"><span class="brand-dot">C</span><span>CleanCase Converter<small>Converter • Cleaning • Case</small></span></div>
+    <nav class="tabs"><button class="tab active">Converter</button><button class="tab">Cleaning</button><button class="tab">Case</button></nav>
+    <span class="chip">v2 • OFFLINE</span>
+  </div>
+
+  <div class="sec-label">02 · Hero</div>
+  <div class="hero">
+    <h1><span class="accent">ইউনিকোড ⇄ বিজয়</span> কনভার্টার</h1>
+    <p>100% accurate, instant conversion. Type or paste — output appears live.</p>
+    <div class="chips"><span class="chip">● Live auto-convert</span><span class="chip">No signup • works offline</span><span class="chip">Ctrl + Enter to convert</span></div>
+  </div>
+
+  <div class="sec-label">03 · Converter card (glass)</div>
+  <div class="card glass">
+    <div class="modebar">
+      <div class="segmented"><button class="active">Unicode → Bijoy</button><button>Bijoy → Unicode</button></div>
+      <div class="row"><button class="btn">Convert Now</button><button class="btn ghost">Copy</button><button class="btn ghost">.txt</button><button class="btn danger-ghost">Clear</button></div>
+    </div>
+    <div class="grid">
+      <div class="pane">
+        <div class="pane-title">Unicode Input <span class="badge u">UNICODE</span></div>
+        <textarea id="tpl-in" style="font-family:'Hind Siliguri',sans-serif">আমি বাংলাদেশকে ভালোবাসি।</textarea>
+        <span class="count"><b>২৪</b> chars • <b>৩</b> words</span>
+      </div>
+      <div class="pane">
+        <div class="pane-title">Bijoy Output <span class="badge b">BIJOY</span></div>
+        <textarea id="tpl-out" readonly></textarea>
+        <span class="count"><b>০</b> chars • <b>০</b> words</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">04 · Component sheet</div>
+  <div class="sheet glass">
+    <div class="row"><span class="row-title">Buttons</span><button class="btn">Convert Now</button><button class="btn ghost">Copy output</button><button class="btn danger-ghost">Clear</button><button class="mini">Paste</button></div>
+    <div class="row"><span class="row-title">Badges</span><span class="badge u">UNICODE</span><span class="badge b">BIJOY</span><span class="chip">Live auto-convert</span></div>
+    <div class="row"><span class="row-title">Segmented</span><div class="segmented"><button class="active">Unicode → Bijoy</button><button>Bijoy → Unicode</button></div></div>
+    <div class="row"><span class="row-title">Switch</span><label class="switch"><input type="checkbox" checked><span class="track"></span><span class="thumb"></span></label><span style="font-size:.85rem">Multiple Enter → Single Enter</span></div>
+    <div class="row"><span class="row-title">Input</span><input class="input" placeholder="Find what  (e.g. ^p^p)"></div>
+  </div>
+
+  <div class="sec-label">05 · Token sheet</div>
+  <div class="sheet glass">
+    <div class="row"><span class="row-title">Blues</span></div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#EFF6FF"></i><span><b>blue-50</b> · #EFF6FF</span></div>
+      <div class="swatch"><i style="background:#DBEAFE"></i><span><b>blue-100</b> · #DBEAFE</span></div>
+      <div class="swatch"><i style="background:#3B82F6"></i><span><b>blue-500</b> · #3B82F6</span></div>
+      <div class="swatch"><i style="background:#2563EB"></i><span><b>blue-600</b> · #2563EB</span></div>
+      <div class="swatch"><i style="background:#1D4ED8"></i><span><b>blue-700</b> · #1D4ED8 ★ seed</span></div>
+      <div class="swatch"><i style="background:#7C3AED"></i><span><b>violet</b> · #7C3AED accent-2</span></div>
+    </div>
+    <div class="row"><span class="row-title">Glass</span></div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:rgba(255,255,255,.65)"></i><span><b>glass</b> · light frost</span></div>
+      <div class="swatch"><i style="background:rgba(15,23,42,.6)"></i><span><b>glass</b> · dark frost</span></div>
+      <div class="swatch"><i style="background:linear-gradient(135deg,#2563EB,#7C3AED)"></i><span><b>brand</b> · blue→violet</span></div>
+      <div class="swatch"><i style="background:linear-gradient(90deg,#2563EB,#7C3AED)"></i><span><b>headline</b> · gradient</span></div>
+    </div>
+    <div class="type-row" style="font-size:var(--fs-3xl); font-weight:700"><small>3xl · Headline</small>ইউনিকোড ⇄ বিজয়</div>
+    <div class="type-row" style="font-size:var(--fs-xl)"><small>xl · Pane text</small>এখানে ইউনিকোড বাংলা লিখুন…</div>
+    <div class="type-row" style="font-size:var(--fs-sm)"><small>sm · UI labels</small>Multiple Enter → Single Enter</div>
+    <div class="space-bar"><span style="width:3rem">8px base</span><i style="width:8px"></i><i style="width:16px"></i><i style="width:24px"></i><i style="width:32px"></i><i style="width:48px"></i></div>
+  </div>
+
+  <footer>
+    Template: <code>design-template.html</code> v2 · approve হলে <code>index.html</code>-এ apply করবো
+  </footer>
+</main>
+
+<script src="converter.js"></script>
+<script>
+/* Theme: follow phone by default, manual toggle overrides */
+(function(){
+  try {
+    if (!localStorage.getItem('tpl-theme') && window.matchMedia &&
+        matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+function tplToggle(){
+  var h = document.documentElement;
+  var next = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  h.setAttribute('data-theme', next);
+  try { localStorage.setItem('tpl-theme', next); } catch (e) {}
+}
+/* Live Bijoy sample via the real engine */
+try {
+  document.getElementById('tpl-out').value =
+    BanglaConverter.unicodeToBijoy(document.getElementById('tpl-in').value);
+} catch (e) {}
+</script>
+</body>
+</html>
