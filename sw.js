@@ -3,7 +3,7 @@
  * Static files only: cache-first for same-origin, runtime cache for
  * Google Fonts, index.html fallback for navigations when offline.
  */
-const CACHE = 'cleancase-v2';
+const CACHE = 'cleancase-v3';
 const CORE = [
   './',
   'index.html',

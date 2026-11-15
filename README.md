@@ -134,7 +134,7 @@ python -m http.server 8000
 ```
 2. After first load, an **Install** (⤓) button appears in the header (Chrome/Edge/Android). Tap it to install.
 3. iPhone/Safari: Share → **Add to Home Screen** (uses `icon-192.png` + standalone display).
-4. To force-update the offline cache after editing files, bump `CACHE` in `sw.js` (e.g. `cleancase-v3`).
+4. To force-update the offline cache after editing files, bump `CACHE` in `sw.js` (e.g. `cleancase-v4`).
 
 ## Usage
 

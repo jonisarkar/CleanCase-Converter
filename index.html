@@ -295,6 +295,9 @@ footer a{color:var(--primary); text-decoration:none; font-weight:500}
 .cleaner-card{margin-top:1rem}
 .cleaner-head{padding:1.3rem 1.3rem .3rem}
 .cleaner-head h2{font-size:1.15rem; display:flex; align-items:center; gap:.6rem}
+.cleaner-head-bar{display:flex; align-items:center; justify-content:space-between; gap:.7rem; flex-wrap:wrap}
+.cleaner-head-bar > h2{min-width:0; flex:1 1 auto; flex-wrap:wrap}
+.cl-top-clean{white-space:nowrap; flex:0 0 auto}
 .cleaner-head h2 .material-symbols-rounded{width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--blue-600),var(--violet)); color:#fff; display:grid; place-items:center; font-size:22px}
 .cleaner-head p{color:var(--text-2); font-size:.86rem; margin-top:.5rem; line-height:1.65; max-width:70ch}
 .cleaner-head code{font-family:inherit; background:var(--glass-well); border:1px solid var(--glass-border); padding:.08rem .45rem; border-radius:6px; font-size:.76rem; font-weight:700}
@@ -372,6 +375,7 @@ footer a{color:var(--primary); text-decoration:none; font-weight:500}
   .topbar-inner{flex-wrap:wrap; row-gap:.4rem}
   .case-btn{min-width:88px}
   textarea{font-size:1.08rem}
+  .cl-top-clean{width:100%}
 }
 /* ---- Full display / focus mode ---- */
 body.full-display .hero, body.full-display .features, body.full-display footer, body.full-display .divider{display:none}
@@ -514,7 +518,10 @@ body.full-display textarea{flex:1; height:auto; min-height:0; resize:none; font-
   <!-- ============ ADVANCED TEXT CLEANING (add-on module) ============ -->
   <section class="card cleaner-card toolview" id="view-cleaning" role="tabpanel" aria-labelledby="tab-cleaning" hidden>
     <div class="cleaner-head">
-      <h2><span class="material-symbols-rounded">cleaning_services</span>Advanced Text Cleaning <span class="badge u">UNICODE + BIJOY SAFE</span></h2>
+      <div class="cleaner-head-bar">
+        <h2><span class="material-symbols-rounded">cleaning_services</span>Advanced Text Cleaning <span class="badge u">UNICODE + BIJOY SAFE</span></h2>
+        <button class="btn btn-primary cl-top-clean" onclick="cleanerClean()" title="Clean the text now — Ctrl/Cmd + Enter"><span class="material-symbols-rounded">cleaning_services</span>Clean Text</button>
+      </div>
       <p>MS Word-এর <b>Find &amp; Replace</b> স্টাইলে টেক্সট পরিষ্কার করুন। বাংলা হরফ, কার, ফলা বা Bijoy কোড নষ্ট হয় না — শুধু নির্বাচিত rule প্রয়োগ হয়। Codes: <code>^p</code>=Enter &nbsp;<code>^l</code>=Line break &nbsp;<code>^t</code>=Tab</p>
     </div>
     <div class="cleaner-body">
@@ -590,7 +597,6 @@ body.full-display textarea{flex:1; height:auto; min-height:0; resize:none; font-
       </div>
 
       <div class="cl-actions">
-        <button class="btn btn-primary" onclick="cleanerClean()"><span class="material-symbols-rounded">cleaning_services</span>Clean Text</button>
         <button class="btn btn-ghost" onclick="cleanerUndo()"><span class="material-symbols-rounded">undo</span>Undo / Restore</button>
         <button class="btn btn-ghost" onclick="cleanerCopy()"><span class="material-symbols-rounded">content_copy</span>Copy Cleaned</button>
         <span style="flex:1"></span>

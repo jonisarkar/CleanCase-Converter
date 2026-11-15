@@ -184,4 +184,16 @@
     if (a) a.addEventListener('input', updateStats);
     updateStats();
   });
+
+  // Ctrl/Cmd + Enter inside the Cleaning view = Clean Text (the top button).
+  document.addEventListener('keydown', function (e) {
+    if (!(e.ctrlKey || e.metaKey) || e.key !== 'Enter') return;
+    var view = $('view-cleaning');
+    if (!view || view.hasAttribute('hidden')) return;
+    var t = e.target;
+    var tag = t && t.tagName ? t.tagName.toUpperCase() : '';
+    if (tag !== 'TEXTAREA' && tag !== 'INPUT') return;
+    e.preventDefault();
+    window.cleanerClean();
+  });
 })();
